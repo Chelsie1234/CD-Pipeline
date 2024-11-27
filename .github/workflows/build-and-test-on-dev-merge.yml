@@ -15,14 +15,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: cd .\backend
-      - run: npm i
+      - run: cd backend
+      - run: npm install
       - run: npm test
       
       - run: cd ..\frontend
-      - run: npm i
+      - run: npm install
       - run: npm test a
       
       - run: cd ..\e2e-tests
-      - run: npm i
+      - run: npm install
       - run: npm test
