@@ -1,0 +1,60 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Build and Test on Dev Merge
+
+on:
+  push:
+    branches: [ "dev" ] # Triggered when there is a push in dev branch
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the code
+        uses: actions/checkout@v4 # Check the code
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          
+      # Install packages in the backend, frontend, and e2e-tests
+      - name: Install packages in the backend
+        working-directory: backend
+        run: npm i
+        
+      - name: Install packages in the frontend
+        working-directory: frontend
+        run: npm i
+
+      - name: Install packages in the e2e-tests
+        working-directory: e2e-tests
+        run: npm i
+
+      # Run tests in the backend, frontend, and e2e-tests
+      - name: Run tests in the backend
+        working-directory: backend
+        run: npm test
+        
+      - name: Run tests in the frontend
+        working-directory: frontend
+        run: npm test a
+
+      # Start the backend and frontend before running E2E tests
+      - name: Start backend
+        working-directory: backend
+        run: npm start & # Start backend in the background
+
+      - name: Start frontend
+        working-directory: frontend
+        run: npm start & # Start frontend in the background
+
+      # Wait for the servers to start
+      - name: Wait for services to be ready
+        run: npx wait-on http://localhost:3000
+
+      # Run E2E tests
+      - name: Run E2E tests
+        working-directory: e2e-tests
+        run: npm test
+
