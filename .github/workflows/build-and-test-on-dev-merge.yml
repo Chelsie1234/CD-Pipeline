@@ -5,24 +5,41 @@ name: Build and Test on Dev Merge
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "dev" ] # Triggered when there is a push in dev branch
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Check the code
+        uses: actions/checkout@v4 # Check the code
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: cd backend
-      - run: npm install
-      - run: npm test
-      
-      - run: cd ..\frontend
-      - run: npm install
-      - run: npm test a
-      
-      - run: cd ..\e2e-tests
-      - run: npm install
-      - run: npm test
+          
+      # Install packages in the backend, frontend, and e2e-tests
+      - name: Install packages in the backend
+        working-directory: backend
+        run: npm i
+        
+      - name: Install packages in the frontend
+        working-directory: frontend
+        run: npm i
+
+      - name: Install packages in the e2e-tests
+        working-directory: e2e-tests
+        run: npm i
+
+      # Run tests in the backend, frontend, and e2e-tests
+      - name: Run tests in the backend
+        working-directory: backend
+        run: npm test
+        
+      - name: Run tests in the frontend
+        working-directory: frontend
+        run: npm test a
+
+      - name: Run tests in the e2e-tests
+        working-directory: e2e-tests
+        run: npm test
