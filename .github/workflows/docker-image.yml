@@ -30,7 +30,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker-compose up --build -d
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest .
 
       - name: Push Docker image to Docker Hub
         run: |
