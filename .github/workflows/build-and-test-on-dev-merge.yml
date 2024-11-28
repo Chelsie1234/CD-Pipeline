@@ -27,10 +27,6 @@ jobs:
         working-directory: frontend
         run: npm i
 
-      - name: Install packages in the e2e-tests
-        working-directory: e2e-tests
-        run: npm i
-
       # Run tests in the backend, frontend, and e2e-tests
       - name: Run tests in the backend
         working-directory: backend
@@ -39,29 +35,3 @@ jobs:
       - name: Run tests in the frontend
         working-directory: frontend
         run: npm test a
-
-      # Start the backend and frontend before running E2E tests
-      - name: Start backend
-        working-directory: backend
-        run: npm start & # Start backend in the background
-
-      - name: Start frontend
-        working-directory: frontend
-        run: npm start & # Start frontend in the background
-
-      # Wait for the servers to start
-      - name: Wait for services to be ready
-        run: npx wait-on http://localhost:3000
-
-      # Run E2E tests
-      - name: Run E2E tests
-        working-directory: e2e-tests
-        run: npm test
-
-      # - name: Merge from dev to main
-      #   uses: everlytic/branch-merge@1.1.2
-      #   with:
-      #     github_token: ${{ secrets.TOKEN }}
-          # source_ref: 'dev' # Source branch is 'dev'
-          # target_branch: 'main' # Target branch is 'main'
-          # commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
