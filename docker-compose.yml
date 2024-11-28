@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mongodb:
-    image: ${{ secrets.DOCKER_USERNAME }}/mongo:latest
+    image: mongo:latest
     container_name: mongodb
     volumes:
       - mongo-data:/data/db
