@@ -12,7 +12,7 @@ services:
       - app-network
 
   backend:
-    image: ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:backend
+    image: ${{ secrets.DOCKER_USERNAME }}/${DOCKER_IMAGE_NAME}:backend
     build:
       context: ./backend
       dockerfile: Dockerfile
