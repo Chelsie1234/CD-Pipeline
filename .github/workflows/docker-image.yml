@@ -22,6 +22,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      # Install packages in the backend, frontend, and e2e-tests
+      - name: Install packages in the backend
+        working-directory: backend
+        run: npm i
+        
+      - name: Install packages in the frontend
+        working-directory: frontend
+        run: npm i
+
       - name: Install packages in the e2e-tests
         working-directory: e2e-tests
         run: npm i
