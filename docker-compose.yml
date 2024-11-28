@@ -12,7 +12,7 @@ services:
       - app-network
 
   backend:
-    image: ${secrets.DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}-backend:latest
+    image: ${secrets.DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}-backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -28,7 +28,7 @@ services:
       - app-network
 
   frontend:
-    image: ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}-frontend:latest
+    image: ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}-frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
