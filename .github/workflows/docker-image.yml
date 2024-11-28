@@ -70,8 +70,8 @@ jobs:
 
       - name: Push Docker image to Docker Hub for the Frontend
         run: |
-          docker-compose push frontend
+          docker-compose push
 
-      - name: Push Docker image to Docker Hub for the Backend
+      - name: Clear Docker Credentials
         run: |
-          docker-compose push backend
+          docker logout
