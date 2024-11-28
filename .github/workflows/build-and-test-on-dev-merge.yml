@@ -58,17 +58,10 @@ jobs:
         working-directory: e2e-tests
         run: npm test
 
-      - uses: everlytic/branch-merge@1.1.2
+      - name: Merge from dev to main
+        uses: everlytic/branch-merge@1.1.2
         with:
           github_token: ${{ secrets.TOKEN }}
           source_ref: 'dev' # Source branch is 'dev'
           target_branch: 'main' # Target branch is 'main'
           commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
-
-      # - name: Merge from dev to main
-      #   uses: devmasx/merge-branch@master
-      #   with:
-      #     type: now
-      #     from_branch: dev
-      #     target_branch: main
-      #     github_token: ${{ secrets.TOKEN }}
