@@ -26,18 +26,18 @@ jobs:
         working-directory: e2e-tests
         run: npm i
 
-      # # Start the backend and frontend before running E2E tests
-      # - name: Start backend
-      #   working-directory: backend
-      #   run: npm start & # Start backend in the background
+      # Start the backend and frontend before running E2E tests
+      - name: Start backend
+        working-directory: backend
+        run: npm start & # Start backend in the background
 
-      # - name: Start frontend
-      #   working-directory: frontend
-      #   run: npm start & # Start frontend in the background
+      - name: Start frontend
+        working-directory: frontend
+        run: npm start & # Start frontend in the background
 
-      # # Wait for the servers to start
-      # - name: Wait for services to be ready
-      #   run: npx wait-on http://localhost:3000
+      # Wait for the servers to start
+      - name: Wait for services to be ready
+        run: npx wait-on http://localhost:3000
 
       # Run E2E tests
       - name: Run E2E tests
